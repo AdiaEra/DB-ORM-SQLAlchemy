@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 
 from models import create_tables, Publisher, Shop, Book, Stock, Sale
 
-DSN = 'postgresql://postgres:Hun$917&305TpS@localhost:5432/books_db'
+DSN = 'postgresql://postgres:пароль@localhost:5432/books_db'
 engine = sqlalchemy.create_engine(DSN)
 create_tables(engine)
 
