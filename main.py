@@ -28,11 +28,11 @@ session.commit()
 
 
 def info_sale(name):
-    res = session.query(Book.title, Shop.name, Sale.price, Sale.date_sale).join(Publisher).join(
+    res = session.query(Book.title, Shop.name, Sale.price, Sale.count, Sale.date_sale).join(Publisher).join(
         Stock).join(Shop).join(Sale).filter(Publisher.name == name).all()
 
     for c in res:
-        print(f'{c.title:<39} | {c.name:<8} | {c.price:<5} | {c.date_sale}')
+        print(f'{c.title:<39} | {c.name:<8} | {c.price * c.count:<5} | {c.date_sale}')
 
 
 print(info_sale(name="O’Reilly"))
