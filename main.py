@@ -28,7 +28,7 @@ session.commit()
 
 def get_shop_by_publisher(name):
     query = session.query(Shop.name).join(Stock).join(
-        Book).join(Publisher).filter(Publisher.name == name)
+        Book).join(Publisher).filter(Publisher.name == name).distinct()
     for c in query:
         print(f'{c.name}')
 
