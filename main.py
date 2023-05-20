@@ -26,14 +26,14 @@ for record in data:
     # session.add(model(id=record.get('pk'), **record.get('fields')))
 session.commit()
 
-def get_shop_by_publisher(name):
+def shop_by_publisher(name):
     query = session.query(Shop.name).join(Stock).join(
         Book).join(Publisher).filter(Publisher.name == name).distinct()
     for c in query:
         print(f'{c.name}')
 
 
-#get_shop_by_publisher("O’Reilly")
+#shop_by_publisher("O’Reilly")
 
 def info_sale(name):
     res = session.query(Book.title, Shop.name, Sale.price, Sale.count, Sale.date_sale).join(Publisher).join(
