@@ -42,4 +42,3 @@ if __name__ == '__main__':
     info_sale(id=data, name=data)
     
 session.close()    
-session.close()
