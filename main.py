@@ -26,21 +26,20 @@ for record in data:
     # session.add(model(id=record.get('pk'), **record.get('fields')))
 session.commit()
 
-def shop_by_publisher(name):
-    query = session.query(Shop.name).join(Stock).join(
-        Book).join(Publisher).filter(Publisher.name == name).distinct()
-    for c in query:
-        print(f'{c.name}')
-
-
-#shop_by_publisher("O’Reilly")
-
-def info_sale(name):
-    res = session.query(Book.title, Shop.name, Sale.price, Sale.count, Sale.date_sale).join(Publisher).join(
-        Stock).join(Shop).join(Sale).filter(Publisher.name == name).all()
-
+def info_sale(id, name):
+    query = session.query(Book.title, Shop.name, Sale.price, Sale.count, Sale.date_sale
+                          ).join(Publisher).join(Stock).join(Shop).join(Sale)
+    if data.isdigit():
+        res = query.filter(Publisher.id == id).all()
+    else:
+        res = query.filter(Publisher.name == name).all()
     for c in res:
         print(f'{c.title:<39} | {c.name:<8} | {c.price * c.count:<5} | {c.date_sale}')
 
 
-#info_sale(name="O’Reilly")
+if __name__ == '__main__':
+    data = input('Введите id или name издателя: ')
+    info_sale(id=data, name=data)
+    
+session.close()    
+session.close()
